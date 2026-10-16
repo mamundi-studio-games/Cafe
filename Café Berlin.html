@@ -1,0 +1,548 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Café Berlin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500&family=Noto+Kufi+Arabic:wght@700;800;900&family=Noto+Naskh+Arabic:wght@500;600&display=swap">
+<style>
+/* Layout: Berlin street-poster. Espresso hero with huge name, yellow TV tower and a cup standing on a yellow ticker band; sticky category bar; colourful illustrated cards with yellow price stickers. Single dark look on purpose. */
+:root {
+  --bg: #170E09;
+  --band: #2A1509;
+  --card: #26170F;
+  --line: #3E2A1C;
+  --fg: #F6EBDD;
+  --muted: #BFA58E;
+  --yellow: #FFC72C;
+  --ink: #170E09;
+  --red: #E4572E;
+  --il-ink: #170E09;
+  --il-cream: #F6EBDD;
+  --il-coffee: #5A3420;
+  --il-crema: #C98F57;
+  --il-copper: #B8743A;
+  --il-gold: #FFC72C;
+  --il-steel: #B7C4CA;
+  --il-glass: #E3F1F3;
+  --il-water: #5BC0EB;
+  --il-cola: #3B1E12;
+  --il-sponge: #E4BC80;
+  --il-pink: #F7D3CB;
+  --il-red: #E4572E;
+  --il-cin: #8A5230;
+  --font-display: "Anton", "Noto Kufi Arabic", system-ui, sans-serif;
+  --font-body: "DM Sans", "Noto Naskh Arabic", system-ui, sans-serif;
+  --dir: -1;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--band);
+  z-index: 30;
+}
+.wrap {
+  max-width: 680px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.disp {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-synthesis: none;
+  text-transform: uppercase;
+}
+
+/* hero */
+.hero { background: radial-gradient(120% 80% at 85% 100%, #5E2C12 0%, var(--band) 62%); overflow: hidden; }
+.hero .wrap { padding-block: 22px 0; display: flex; flex-direction: column; gap: 14px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sign {
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 4px 14px;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 2px var(--yellow);
+  margin: 2px;
+}
+.langs { display: inline-flex; border: 1.5px solid var(--muted); border-radius: 999px; padding: 3px; gap: 2px; }
+.langs button {
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-synthesis: none;
+  font-size: 0.95rem;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 15px;
+  min-height: 40px;
+  cursor: pointer;
+}
+.langs button[aria-pressed="true"] { background: var(--yellow); color: var(--ink); }
+.langs button:focus-visible, .chip:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.brand-block { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.brand-sub {
+  color: var(--yellow);
+  font-size: clamp(1.3rem, 6vw, 2rem);
+  letter-spacing: 0.4em;
+  line-height: 1.2;
+}
+.brand {
+  margin: 0;
+  font-size: clamp(4.4rem, 22vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+html[lang="ku"] .brand, html[lang="ar"] .brand { font-weight: 900; line-height: 1.25; letter-spacing: 0; }
+html[lang="ku"] .brand-sub, html[lang="ar"] .brand-sub { letter-spacing: 0; font-weight: 800; }
+html[lang="ku"] .sign, html[lang="ar"] .sign { letter-spacing: 0; }
+.scene { align-self: flex-end; width: clamp(180px, 56vw, 270px); height: auto; margin-top: -26px; display: block; }
+.tower { fill: var(--yellow); }
+.steam { fill: none; stroke: var(--il-cream); stroke-width: 6; stroke-linecap: round; opacity: 0.7; transform-box: fill-box; }
+@media (prefers-reduced-motion: no-preference) {
+  .steam { animation: rise 3.4s ease-in-out infinite; }
+  .steam.b { animation-delay: 1.4s; }
+}
+@keyframes rise {
+  0% { transform: translateY(10px); opacity: 0; }
+  35% { opacity: 0.75; }
+  100% { transform: translateY(-14px); opacity: 0; }
+}
+
+/* ticker */
+.ticker { background: var(--yellow); color: var(--ink); overflow: hidden; }
+.track { display: flex; width: max-content; padding-block: 10px; }
+.group { display: flex; flex: 0 0 auto; }
+.tick { display: inline-flex; align-items: center; gap: 18px; padding-inline-end: 18px; font-size: 1.2rem; line-height: 1.5; white-space: nowrap; }
+.tick::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .track { animation: slide 30s linear infinite; }
+}
+@keyframes slide { to { transform: translateX(calc(var(--dir) * 50%)); } }
+
+/* sticky category bar */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--band); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.nav .wrap::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-synthesis: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: var(--fg);
+  background: transparent;
+  border: 1.5px solid var(--muted);
+  border-radius: 999px;
+  padding: 6px 18px;
+  min-height: 40px;
+  cursor: pointer;
+}
+.chip[aria-current="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+
+/* menu */
+.menu .wrap { padding-block: 6px 0; }
+section { padding-block: 34px 0; scroll-margin-top: calc(56px + env(safe-area-inset-top, 0px)); }
+.sec-head { display: flex; flex-direction: column; gap: 10px; margin: 0 0 18px; }
+.sec-head h2 { margin: 0; font-size: clamp(2.2rem, 10vw, 3rem); line-height: 1.15; text-wrap: balance; }
+html[lang="ku"] .sec-head h2, html[lang="ar"] .sec-head h2 { line-height: 1.4; }
+.sec-head::after { content: ""; width: 72px; height: 8px; border-radius: 4px; background: var(--yellow); }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.art {
+  background: radial-gradient(circle at 72% 28%, rgba(255, 255, 255, 0.22) 0 24%, transparent 25%), var(--tile);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 0.82;
+}
+.art svg { width: 74%; max-height: 86%; height: auto; }
+.info { padding: 12px 14px 16px; min-width: 0; }
+.name { margin: 0; font-size: 1.35rem; line-height: 1.3; overflow-wrap: anywhere; }
+html[lang="ku"] .name, html[lang="ar"] .name { line-height: 1.55; font-size: 1.25rem; }
+.sticker {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 10px;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 3px solid var(--bg);
+  transform: rotate(-9deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.05;
+  text-align: center;
+}
+.num { font-family: var(--font-display); font-weight: 800; font-synthesis: none; font-size: 1.4rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.unit { font-weight: 700; font-size: 0.68rem; letter-spacing: 0.06em; }
+html[lang="ku"] .unit, html[lang="ar"] .unit { letter-spacing: 0; }
+
+.card.feature { display: grid; grid-column: 1 / -1; grid-template-columns: minmax(130px, 42%) minmax(0, 1fr); align-items: stretch; }
+.feature .art { aspect-ratio: auto; min-height: 150px; }
+.feature .art svg { width: 70%; }
+.feature .info { align-self: center; padding: 16px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.feature .name { font-size: 1.8rem; }
+html[lang="ku"] .feature .name, html[lang="ar"] .feature .name { font-size: 1.6rem; }
+.feature .sticker { position: static; width: auto; height: auto; border-radius: 999px; transform: none; flex-direction: row; gap: 6px; padding: 6px 16px; border: 0; align-items: baseline; }
+.feature .num { font-size: 1.6rem; }
+
+/* footer */
+.foot { margin-top: 44px; background: var(--yellow); color: var(--ink); }
+.foot .wrap { padding-block: 26px 40px; display: flex; flex-direction: column; gap: 6px; }
+.foot-name { font-size: 2.2rem; line-height: 1.3; }
+.foot p { margin: 0; font-weight: 500; }
+
+/* illustration paint */
+.s { stroke: var(--il-ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.n { fill: none; }
+.f-cream { fill: var(--il-cream); }
+.f-coffee { fill: var(--il-coffee); }
+.f-crema { fill: var(--il-crema); }
+.f-copper { fill: var(--il-copper); }
+.f-gold { fill: var(--il-gold); }
+.f-steel { fill: var(--il-steel); }
+.f-glass { fill: var(--il-glass); fill-opacity: 0.7; }
+.f-water { fill: var(--il-water); }
+.f-cola { fill: var(--il-cola); }
+.f-sponge { fill: var(--il-sponge); }
+.f-pink { fill: var(--il-pink); }
+.f-red { fill: var(--il-red); }
+.f-ink { fill: var(--il-ink); }
+.f-ice { fill: var(--il-cream); fill-opacity: 0.65; }
+.s-cin { stroke: var(--il-cin); stroke-width: 4; stroke-linecap: round; fill: none; }
+.s-red { stroke: var(--il-red); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+.shine { stroke: var(--il-cream); stroke-width: 2; stroke-linecap: round; fill: none; opacity: 0.6; }
+.soft { opacity: 0.45; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-espresso" viewBox="0 0 64 64">
+      <ellipse class="f-cream s" cx="32" cy="52" rx="24" ry="5"/>
+      <path class="n s" d="M48 31H51A5 5 0 0 1 51 41H47"/>
+      <path class="f-cream s" d="M14 28H48V36Q48 50 31 50Q14 50 14 36Z"/>
+      <ellipse class="f-coffee s" cx="31" cy="28" rx="17" ry="4"/>
+      <ellipse class="f-crema" cx="31" cy="28" rx="11" ry="2.2"/>
+      <path class="n s soft" d="M26 20Q23 16 26 12M36 20Q33 16 36 11"/>
+    </symbol>
+    <symbol id="i-turkish" viewBox="0 0 64 64">
+      <ellipse class="f-cream s" cx="31" cy="54" rx="21" ry="4"/>
+      <path class="n s" stroke-width="3" d="M46 30L58 17"/>
+      <circle class="f-ink" cx="58" cy="17" r="2.5"/>
+      <path class="f-copper s" d="M22 20H40L47 46Q48 52 41 52H21Q14 52 15 46Z"/>
+      <path class="f-copper s" d="M22 20L15 14L23 25"/>
+      <ellipse class="f-gold s" cx="31" cy="20" rx="9" ry="2.6"/>
+      <ellipse class="f-coffee" cx="31" cy="20" rx="6.5" ry="1.4"/>
+      <path class="shine" d="M22 31L20 44"/>
+    </symbol>
+    <symbol id="i-mexican" viewBox="0 0 64 64">
+      <path class="f-glass" d="M18 14H42V46Q42 52 36 52H24Q18 52 18 46Z"/>
+      <rect class="f-cream" x="19" y="16" width="22" height="9"/>
+      <rect class="f-crema" x="19" y="25" width="22" height="8"/>
+      <path class="f-coffee" d="M19 33H41V46Q41 51 36 51H24Q19 51 19 46Z"/>
+      <path class="s-cin" d="M37 7L29 28"/>
+      <path class="n s" d="M42 20H47A5 5 0 0 1 47 38H42"/>
+      <path class="n s" d="M18 14H42V46Q42 52 36 52H24Q18 52 18 46Z"/>
+      <path class="shine" d="M22 18V42"/>
+    </symbol>
+    <symbol id="i-cake" viewBox="0 0 64 64">
+      <ellipse class="f-cream s" cx="32" cy="55" rx="27" ry="5"/>
+      <rect class="f-sponge s" x="14" y="40" width="36" height="13" rx="3"/>
+      <rect class="f-sponge s" x="14" y="27" width="36" height="10"/>
+      <rect class="f-pink s" x="14" y="36" width="36" height="5"/>
+      <path class="f-pink s" d="M14 28Q14 20 22 20H42Q50 20 50 28Z"/>
+      <circle class="f-red s" cx="32" cy="14" r="4.5"/>
+      <path class="n s" d="M32 9.5Q34 5 38 4"/>
+    </symbol>
+    <symbol id="i-can" viewBox="0 0 64 64">
+      <rect class="f-steel s" x="21" y="12" width="22" height="42" rx="5"/>
+      <rect class="f-gold" x="21.5" y="28" width="21" height="10"/>
+      <rect class="n s" x="21" y="12" width="22" height="42" rx="5"/>
+      <ellipse class="f-steel s" cx="32" cy="12" rx="11" ry="3"/>
+      <rect class="f-cream s" x="28" y="10" width="8" height="3" rx="1.5"/>
+      <path class="shine" d="M25 20V48"/>
+    </symbol>
+    <symbol id="i-water" viewBox="0 0 64 64">
+      <path class="f-water" d="M21 32H43V50Q43 55 38 55H26Q21 55 21 50Z"/>
+      <path class="n s soft" d="M21 32Q26.5 28 32 32T43 32"/>
+      <rect class="f-steel s" x="27" y="6" width="10" height="6" rx="2"/>
+      <path class="f-glass s" d="M27 12H37V18Q44 24 44 30V50Q44 56 38 56H26Q20 56 20 50V30Q20 24 27 18Z"/>
+      <path class="shine" d="M25 34V50"/>
+    </symbol>
+    <symbol id="i-bottle" viewBox="0 0 64 64">
+      <path class="f-cola s" d="M28 9H36V16Q36 22 42 28V50Q42 56 36 56H28Q22 56 22 50V28Q28 22 28 16Z"/>
+      <rect class="f-gold s" x="27" y="4" width="10" height="5" rx="1.5"/>
+      <rect class="f-cream" x="22.8" y="35" width="18.4" height="9"/>
+      <path class="shine" d="M26 30V50"/>
+    </symbol>
+    <symbol id="i-glass" viewBox="0 0 64 64">
+      <path class="f-cola s" d="M16 20H46L43 52Q43 56 39 56H23Q19 56 19 52Z"/>
+      <path class="f-cream" d="M17.2 20H44.8L44.5 24.5H17.5Z"/>
+      <rect class="f-ice s" x="22" y="29" width="9" height="9" rx="2" transform="rotate(-12 26 33)"/>
+      <rect class="f-ice s" x="31" y="38" width="9" height="9" rx="2" transform="rotate(10 35 42)"/>
+      <path class="n s" stroke-width="4.5" d="M36 28L44 6"/>
+      <path class="s-red" d="M36 28L44 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="sign disp" id="city"></span>
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" id="btn-ku" data-lang="ku">کوردی</button>
+        <button type="button" id="btn-ar" data-lang="ar">العربية</button>
+        <button type="button" id="btn-en" data-lang="en">English</button>
+      </div>
+    </div>
+    <div class="brand-block">
+      <span class="brand-sub disp" id="brand-sub">Café</span>
+      <h1 class="brand disp" id="brand">Berlin</h1>
+    </div>
+    <svg class="scene" viewBox="0 0 270 280" role="img" aria-label="Berlin TV tower and a steaming cup of coffee">
+      <polygon class="tower" points="52,280 66,170 72,170 86,280"/>
+      <rect class="tower" x="67.5" y="74" width="3" height="96"/>
+      <rect class="tower" x="68.2" y="22" width="1.6" height="54"/>
+      <circle class="tower" cx="69" cy="20" r="4"/>
+      <circle class="tower" cx="69" cy="140" r="26"/>
+      <circle cx="69" cy="140" r="18" fill="none" stroke="var(--band)" stroke-width="2.5" opacity="0.55"/>
+      <rect class="tower" x="40" y="164" width="58" height="7" rx="3.5"/>
+      <ellipse class="f-cream" cx="180" cy="270" rx="84" ry="10"/>
+      <path class="n" stroke="var(--il-cream)" stroke-width="9" stroke-linecap="round" d="M234 196H246A15 15 0 0 1 246 226H226"/>
+      <path class="f-cream" d="M110 186H250V214Q250 270 180 270Q110 270 110 214Z"/>
+      <ellipse class="f-coffee" cx="180" cy="186" rx="70" ry="12"/>
+      <ellipse class="f-crema" cx="180" cy="186" rx="58" ry="8"/>
+      <path class="steam" d="M160 168C148 148 172 138 160 112"/>
+      <path class="steam b" d="M198 170C186 150 210 138 198 110"/>
+    </svg>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<nav class="nav" id="nav" aria-label="Menu sections"><div class="wrap" id="nav-inner"></div></nav>
+
+<main class="menu"><div class="wrap" id="menu"></div></main>
+
+<footer class="foot"><div class="wrap">
+  <strong class="foot-name disp" id="foot-name"></strong>
+  <p id="foot-city"></p>
+  <p id="note"></p>
+</div></footer>
+
+<script>
+(function () {
+  var T = {
+    ku: { dir: "rtl", city: "هەولێر", sub: "کافێ", main: "بەرلین", unit: "دینار", note: "نرخەکان بە دیناری عێراقین.", title: "کافێ بەرلین", digits: true },
+    ar: { dir: "rtl", city: "أربيل", sub: "كافيه", main: "برلين", unit: "دينار", note: "الأسعار بالدينار العراقي.", title: "كافيه برلين", digits: true },
+    en: { dir: "ltr", city: "Erbil", sub: "Café", main: "Berlin", unit: "IQD", note: "Prices are in Iraqi dinar.", title: "Café Berlin", digits: false }
+  };
+
+  var MENU = [
+    {
+      title: { ku: "خواردنەوە گەرمەکان", ar: "مشروبات ساخنة", en: "Hot Drinks" },
+      items: [
+        { n: { ku: "ئێسپرێسۆ", ar: "إسبريسو", en: "Espresso" }, p: 2500, i: "espresso", c: "#E4572E" },
+        { n: { ku: "قاوەی تورکی", ar: "قهوة تركية", en: "Turkish Coffee" }, p: 2000, i: "turkish", c: "#1F9E96" },
+        { n: { ku: "مەکسیکی", ar: "مكسيكي", en: "Mexican" }, p: 3000, i: "mexican", c: "#8A5BD6" }
+      ]
+    },
+    {
+      title: { ku: "شیرینی", ar: "حلويات", en: "Sweets" },
+      items: [
+        { n: { ku: "کێک", ar: "كيك", en: "Cake" }, p: 2500, i: "cake", c: "#F28FA0" }
+      ]
+    },
+    {
+      title: { ku: "خواردنەوە سارد", ar: "مشروبات باردة", en: "Cold Drinks" },
+      items: [
+        { n: { ku: "تایگەر", ar: "تايغر", en: "Tiger" }, p: 1500, i: "can", c: "#2F6FDE" },
+        { n: { ku: "ئاو", ar: "ماء", en: "Water" }, p: 250, i: "water", c: "#F2A65A" },
+        { n: { ku: "پێپسی", ar: "بيبسي", en: "Pepsi" }, p: 500, i: "bottle", c: "#1F9E96" },
+        { n: { ku: "کۆکا کۆلا", ar: "كوكا كولا", en: "Coca-Cola" }, p: 500, i: "glass", c: "#E4572E" }
+      ]
+    }
+  ];
+
+  var TICKER = "بەخێر بێن بۆ کافێیەکەمان هەموو خواردنەوەکان داندراوە";
+
+  var TICKERS = {
+    ku: TICKER,
+    ar: "أهلاً بكم في مقهانا، جميع المشروبات متوفرة",
+    en: "Welcome to our café, all drinks are available"
+  };
+
+  var AR_DIGITS = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  function fmt(n, useArabic) {
+    var s = String(n);
+    if (!useArabic) return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return s.replace(/\d/g, function (d) { return AR_DIGITS[+d]; })
+            .replace(/\B(?=(?:[٠-٩]{3})+(?![٠-٩]))/g, "٬");
+  }
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function icon(id) {
+    var svg = document.createElementNS(SVGNS, "svg");
+    svg.setAttribute("viewBox", "0 0 64 64");
+    svg.setAttribute("aria-hidden", "true");
+    var use = document.createElementNS(SVGNS, "use");
+    use.setAttribute("href", "#i-" + id);
+    svg.appendChild(use);
+    return svg;
+  }
+
+  var observer = null;
+
+  function render(lang) {
+    var t = T[lang];
+    var root = document.documentElement;
+    root.setAttribute("lang", lang);
+    root.setAttribute("dir", t.dir);
+    root.style.setProperty("--dir", t.dir === "rtl" ? "1" : "-1");
+    document.title = t.title;
+
+    document.getElementById("city").textContent = t.city;
+    document.getElementById("brand-sub").textContent = t.sub;
+    document.getElementById("brand").textContent = t.main;
+    document.getElementById("foot-name").textContent = t.title;
+    document.getElementById("foot-city").textContent = t.city;
+    document.getElementById("note").textContent = t.note;
+
+    ["ku", "ar", "en"].forEach(function (l) {
+      document.getElementById("btn-" + l).setAttribute("aria-pressed", l === lang ? "true" : "false");
+    });
+
+    /* ticker */
+    var track = document.getElementById("track");
+    track.textContent = "";
+    for (var g = 0; g < 2; g++) {
+      var group = el("div", "group");
+      for (var rep = 0; rep < 2; rep++) {
+        group.appendChild(el("span", "tick disp", TICKERS[lang]));
+      }
+      track.appendChild(group);
+    }
+
+    var nav = document.getElementById("nav-inner");
+    var menu = document.getElementById("menu");
+    nav.textContent = "";
+    menu.textContent = "";
+    if (observer) observer.disconnect();
+
+    MENU.forEach(function (sec, idx) {
+      var chip = el("button", "chip", sec.title[lang]);
+      chip.type = "button";
+      chip.setAttribute("data-target", "sec-" + idx);
+      if (idx === 0) chip.setAttribute("aria-current", "true");
+      nav.appendChild(chip);
+
+      var s = el("section");
+      s.id = "sec-" + idx;
+      var head = el("div", "sec-head");
+      head.appendChild(el("h2", "disp", sec.title[lang]));
+      s.appendChild(head);
+
+      var ul = el("ul", "grid");
+      var odd = sec.items.length % 2 === 1;
+      sec.items.forEach(function (it, k) {
+        var li = el("li", "card" + (odd && k === 0 ? " feature" : ""));
+        li.style.setProperty("--tile", it.c);
+        var art = el("div", "art");
+        art.appendChild(icon(it.i));
+        li.appendChild(art);
+        var info = el("div", "info");
+        info.appendChild(el("h3", "name disp", it.n[lang]));
+        var st = el("div", "sticker");
+        st.appendChild(el("span", "num", fmt(it.p, t.digits)));
+        st.appendChild(el("span", "unit", t.unit));
+        info.appendChild(st);
+        li.appendChild(info);
+        ul.appendChild(li);
+      });
+      s.appendChild(ul);
+      menu.appendChild(s);
+    });
+
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var id = en.target.id;
+          nav.querySelectorAll(".chip").forEach(function (c) {
+            if (c.getAttribute("data-target") === id) c.setAttribute("aria-current", "true");
+            else c.removeAttribute("aria-current");
+          });
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+      menu.querySelectorAll("section").forEach(function (s) { observer.observe(s); });
+    }
+  }
+
+  var lang = "ku";
+  try {
+    var saved = localStorage.getItem("cafe-berlin-lang");
+    if (saved && T[saved]) lang = saved;
+  } catch (e) {}
+  render(lang);
+
+  document.querySelector(".langs").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-lang]");
+    if (!b) return;
+    lang = b.getAttribute("data-lang");
+    render(lang);
+    try { localStorage.setItem("cafe-berlin-lang", lang); } catch (e) {}
+  });
+
+  document.getElementById("nav-inner").addEventListener("click", function (ev) {
+    var c = ev.target.closest(".chip");
+    if (!c) return;
+    var target = document.getElementById(c.getAttribute("data-target"));
+    if (target) target.scrollIntoView({ block: "start" });
+  });
+})();
+</script>
+
+</body></html>
